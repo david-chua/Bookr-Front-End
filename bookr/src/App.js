@@ -32,7 +32,9 @@ class App extends Component {
       }
       axios.get('http://localhost:3300/api/books/all', reqOptions)
         .then(response => {
+
           this.setState({reviewedBooks: response.data.books})
+          console.log(this.state.reviewedBooks)
         })
         .catch(error => {
           console.log(error)

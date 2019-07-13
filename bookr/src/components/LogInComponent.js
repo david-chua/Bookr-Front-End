@@ -37,7 +37,7 @@ class LogInComponent extends React.Component{
       password: this.state.passwordInput
     }
     if (this.state.passwordInput === this.state.passwordInputCheck){
-      axios.post('https://bookr-server.herokuapp.com/api/signup/', newUser)
+      axios.post('http://localhost:3300/api/signup/', newUser)
       .then(response => {
         localStorage.setItem('jwt', response.data.token)
         localStorage.setItem('user', newUser.username);
@@ -56,7 +56,7 @@ class LogInComponent extends React.Component{
       password: this.state.passwordInput
     }
 
-    axios.post('https://bookr-server.herokuapp.com/api/login/', registeredUser)
+    axios.post('http://localhost:3300/api/login/', registeredUser)
     .then(response => {
       localStorage.setItem('user', registeredUser.username);
       localStorage.setItem('jwt', response.data.token)
