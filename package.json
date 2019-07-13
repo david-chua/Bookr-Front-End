@@ -1,0 +1,8 @@
+{
+  "name": "Bookr-Front-End",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:david-chua/Bookr-Front-End.git",
+  "author": "david-chua <dp_chua@hotmail.com>",
+  "license": "MIT"
+}
