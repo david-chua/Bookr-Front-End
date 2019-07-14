@@ -1,5 +1,5 @@
 [build]
-base="book/"
+base="bookr/"
 publish="bookr/build"
 command="yarn build"
 
