@@ -30,37 +30,49 @@ class App extends Component {
             Authorization:token
         }
       }
-      axios.get('http://localhost:3300/api/books/all', reqOptions)
+      axios.get('http://localhost:9090/books/', reqOptions)
         .then(response => {
-
           this.setState({reviewedBooks: response.data.books})
-          console.log(this.state.reviewedBooks)
         })
         .catch(error => {
           console.log(error)
         })
   }
 
-  componentDidUpdate(){
-      const token= localStorage.getItem('jwt');
-      const reqOptions = {
-        headers:{
-            Authorization:token
-        }
-      }
-      axios.get('http://localhost:3300/api/books/all', reqOptions)
-        .then(response => {
-          this.setState({reviewedBooks: response.data.books})
-        })
-        .catch(error => {
-          return error;
-        })
+  // componentDidUpdate(){
+  //     const token= localStorage.getItem('jwt');
+  //     const reqOptions = {
+  //       headers:{
+  //           Authorization:token
+  //       }
+  //     }
+  //     axios.get('http://localhost:9090/books/', reqOptions)
+  //       .then(response => {
+  //         this.setState({reviewedBooks: response.data.books})
+  //       })
+  //       .catch(error => {
+  //         return error;
+  //       })
+  // }
 
-
+getBookById(id){
+  const token= localStorage.getItem('jwt');
+  const reqOptions = {
+    headers:{
+        Authorization:token
+    }
   }
+  axios.get(`http://localhost:9090/books/${id}`, reqOptions)
+    .then(response => {
+      return response;
+    })
+    .catch(error => {
+      return error;
+    })
+};
 
 deleteReview(id, reqOptions){
-  axios.delete(`http://localhost:3300/api/reviews/${id}`, reqOptions)
+  axios.delete(`http://localhost:9090/reviews/${id}`, reqOptions)
     .then(response => {
       return response;
     })
@@ -70,7 +82,7 @@ deleteReview(id, reqOptions){
 }
 
 editReview(id, reqOptions, reqBody){
-  axios.put(`http://localhost:3300/api/reviews/${id}`, reqOptions, reqBody)
+  axios.put(`http://localhost:9090/reviews/${id}`, reqOptions, reqBody)
     .then(response=>{
       console.log(response)
     })
@@ -80,7 +92,7 @@ editReview(id, reqOptions, reqBody){
 }
 
   addBook(newReview, reqOptions) {
-    axios.post('http://localhost:3300/api/reviews', newReview, reqOptions)
+    axios.post('http://localhost:9090/reviews', newReview, reqOptions)
       .then(response => {
         console.log(response);
         // return response;
@@ -139,11 +151,11 @@ editReview(id, reqOptions, reqBody){
 
           <Route
             exact path="/userpage/"
-            render={(props) => <BookList {...props } history={this.props.history} books={this.state.reviewedBooks} />}
+            render={(props) => <BookList {...props } history={this.props.history} books={this.state.reviewedBooks} getBookById={this.getBookById} />}
           />
 
           <Route
-            exact path="/userpage/:id"
+            exact path="/books/:id"
             render={(props) => <ReviewedBook {...props }
             history={this.props.history}
             books = {this.state.reviewedBooks}

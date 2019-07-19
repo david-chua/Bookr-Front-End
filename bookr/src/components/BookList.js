@@ -28,7 +28,7 @@ class BookList extends React.Component{
         <BookListTitle> My Books </BookListTitle>
         <BooksContainer>
           { this.props.books.map((book,index) => (
-              <Book key={index} id={book.bookID} book={book} />
+              <Book key={index} id={book.bookID} book={book} getBookById={this.props.getBookById} />
             ))}
         </BooksContainer>
       </div>

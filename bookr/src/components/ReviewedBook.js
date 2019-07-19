@@ -38,11 +38,12 @@ class ReviewedBook extends React.Component{
             Authorization:token
         }
       }
-      axios.get(`http://localhost:3300/api/reviews/${id}`, reqOptions)
+      axios.get(`http://localhost:9090/books/${id}`, reqOptions)
         .then(response => {
-          this.setState({book: response.data.book,
-          bookId: id})
-
+          this.setState({
+            book: response.data.book
+          })
+          console.log(response);
         })
         .catch(error => {
           return error;
@@ -51,6 +52,7 @@ class ReviewedBook extends React.Component{
   }
 
   render(){
+    console.log('reviewed book')
     let reviewData
     if (this.state.book.reviews){
       reviewData = this.state.book.reviews.map((review, i) => {
